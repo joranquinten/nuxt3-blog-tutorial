@@ -9,5 +9,10 @@
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.13"
+  },
+  "dependencies": {
+    "@contentful/rich-text-html-renderer": "^15.13.1",
+    "@contentful/rich-text-types": "^15.13.2",
+    "contentful": "^9.2.10"
   }
 }
