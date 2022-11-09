@@ -2,6 +2,8 @@
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
+💡 This repository is part of a series where we connect Nuxt to Contentful to create a simple blog. The tutorial itself can be started [via this link](https://www.joranquinten.nl/tutorials/simple-nuxt-3-0-blog-with-contentful-as-headless-cms/). All of the below information is default Nuxt3 generated Readme contents and kept original by intent.
+
 ## Setup
 
 Make sure to install the dependencies:
