@@ -7,21 +7,7 @@ interface Props {
 }
 const props = defineProps<Props>();
 // ----------------------------------------------------------------------------
-const config = useRuntimeConfig();
-
 const { title, body, heroImage } = await usePage(props.slug);
-
-const uri = useRoute().path;
-
-useHead({
-  title,
-  link: [
-    {
-      rel: "canonical",
-      href: `${config.HOST}/${props.slug}`,
-    },
-  ],
-});
 </script>
 
 <template>
