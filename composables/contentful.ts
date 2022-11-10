@@ -42,7 +42,7 @@ export const usePagesNav = async (): Promise<PageNav[]> => {
         const { $contentfulClient } = nuxtApp
         return $contentfulClient.getEntries({
             content_type: 'page',
-            'fields.slug[ne]': 'home'
+            'fields.slug[ne]': 'home' // filter out home slug
         })
     })
 
