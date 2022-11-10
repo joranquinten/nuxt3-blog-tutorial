@@ -14,6 +14,10 @@ interface Page {
     body: object;
     heroImage?: Image;
 };
+interface PageNav {
+    title: string;
+    slug: string;
+};
 
 export const usePage = async (slug: string): Promise<Page> => {
     const { data } = await useAsyncData('page', async (nuxtApp) => {
@@ -31,4 +35,22 @@ export const usePage = async (slug: string): Promise<Page> => {
         body,
         heroImage
     }
+}
+
+export const usePagesNav = async (): Promise<PageNav[]> => {
+    const { data } = await useAsyncData('pageNav', async (nuxtApp) => {
+        const { $contentfulClient } = nuxtApp
+        return $contentfulClient.getEntries({
+            content_type: 'page',
+            'fields.slug[ne]': 'home'
+        })
+    })
+
+    const pagesNav = data.value.items
+        .map((pageFields: any) => {
+            const { title, slug } = pageFields.fields
+            return { title, slug }
+        })
+
+    return pagesNav
 }
