@@ -8,7 +8,6 @@ interface Image {
         },
     },
 }
-
 interface Page {
     title: string;
     body: object;
@@ -17,6 +16,11 @@ interface Page {
 interface PageNav {
     title: string;
     slug: string;
+};
+interface Article {
+    title: string;
+    body: object;
+    heroImage?: Image;
 };
 
 export const usePage = async (slug: string): Promise<Page> => {
@@ -53,4 +57,35 @@ export const usePagesNav = async (): Promise<PageNav[]> => {
         })
 
     return pagesNav
+}
+
+export const useArticles = async (slug: string = ''): Promise<Article | Article[]> => {
+    const fetchAll = (slug === '');
+    const key = fetchAll ? `articles` : `article`
+    const query = fetchAll ? {} : {
+        'fields.slug[in]': slug,
+        limit: 1,
+    }
+    const { data } = await useAsyncData(key, async (nuxtApp) => {
+        const { $contentfulClient } = nuxtApp
+        return $contentfulClient.getEntries({
+            content_type: 'post',
+            ...query,
+        })
+    })
+
+    if (fetchAll) {
+        return data.value.items.map((item: any) => { 
+            const { title, slug } = item.fields;
+            return { title, slug }
+        })
+    }
+    
+    const { title, body, heroImage } = data.value.items[0].fields;
+
+    return {
+        title,
+        body,
+        heroImage
+    }
 }
