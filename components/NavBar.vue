@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-const NavItems = await usePagesNav();
+const NavPages = await usePagesNav();
+const NavItems = [...NavPages, { slug: "articles", title: "Articles" }];
 </script>
 
 <template>
@@ -11,6 +12,5 @@ const NavItems = await usePagesNav();
       :title="item.title"
       >{{ item.title }}
     </a>
-    <a href="/articles">Articles</a>
   </nav>
 </template>
