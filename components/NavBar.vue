@@ -11,5 +11,6 @@ const NavItems = await usePagesNav();
       :title="item.title"
       >{{ item.title }}
     </a>
+    <a href="/articles">Articles</a>
   </nav>
 </template>
