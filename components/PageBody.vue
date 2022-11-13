@@ -18,7 +18,7 @@ const { title, body, heroImage } = await usePage(props.slug);
       </h1>
     </header>
     <div>
-      {{ body }}
+      <DocumentToHtmlString :document="body" />
     </div>
   </article>
 </template>

@@ -18,7 +18,7 @@ const { title, body } = await useArticles(props.slug);
       </h1>
     </header>
     <div>
-      {{ body }}
+      <DocumentToHtmlString :document="body" />
     </div>
   </article>
 </template>
