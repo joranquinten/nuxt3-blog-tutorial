@@ -1,3 +1,5 @@
+import { BLOCKS } from '@contentful/rich-text-types';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 interface Image {
     title: string;
     description?: string;
@@ -88,4 +90,23 @@ export const useArticles = async (slug: string = ''): Promise<Article | Article[
         body,
         heroImage
     }
+}
+
+export const useDocumentToHtmlString = (document: any): string => {
+
+    const options = {
+        renderNode: {
+            [BLOCKS.EMBEDDED_ENTRY]: (node: any) => `<div>EMBEDDED_ENTRY_NOT_CONFIGURED: ${(JSON.stringify(node))}</div>`,
+            [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+                const {
+                    title,
+                    file: {
+                        url
+                    },
+                } = node?.data?.target?.fields;
+                return `<img src="https:${url}" alt="${title}" role="presentation" class="rounded-lg shadow-md" />`
+            }
+        }
+    }
+    return documentToHtmlString({ ...document }, options);
 }
