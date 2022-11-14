@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-/**
- * Define props
- */
 interface Props {
   slug: string;
 }
 const props = defineProps<Props>();
-// ----------------------------------------------------------------------------
-const { title, body } = await useArticles(props.slug);
+
+const searchParams = useSlugQuery(props.slug);
+
+const { title, body } = await useArticle({ searchParams, key: props.slug });
 </script>
 
 <template>
